@@ -1,5 +1,5 @@
 {
-  "name": "DevPod Infrastructure Base",
+  "name": "devlab",
   "build": {
     "dockerfile": "Dockerfile"
   },
