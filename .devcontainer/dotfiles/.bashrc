@@ -296,7 +296,7 @@ serve() {
 }
 
 # Docker quick shell
-dsh() {
+dsh () {
     if [ -z "$1" ]; then
         echo "Usage: dsh <container>"
         return 1
