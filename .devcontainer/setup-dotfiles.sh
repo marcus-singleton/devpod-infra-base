@@ -45,11 +45,18 @@ if [ -d "${DOTFILES_DIR}/nvim/lua" ]; then
     echo "  ✓ Copied nvim/lua directory"
 fi
 
-# FZF
+# FZF installation
 if [ ! -d ~/.fzf ]; then
     echo "📦 Installing FZF..."
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --all
+    # Install binaries only (skip shell modifications)
+    ~/.fzf/install --bin --no-update-rc --no-bash --no-zsh --no-fish
+fi
+
+# Copy our pre-configured .fzf.bash (no bugs!)
+if [ -f "${DOTFILES_DIR}/.fzf.bash" ]; then
+    echo "  ✓ Copied .fzf.bash"
+    cp "${DOTFILES_DIR}/.fzf.bash" ~/.fzf.bash
 fi
 
 # Fix ownership
