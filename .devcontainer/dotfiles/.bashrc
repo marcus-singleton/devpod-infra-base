@@ -80,11 +80,11 @@ if [ "$TERM" != "linux" ]; then
     echo -e "  ${YELLOW}📅 Date:${RESET} $(date '+%A, %B %d, %Y at %H:%M %Z')"
     
     if git rev-parse --git-dir > /dev/null 2>&1; then
-        local branch=$(git branch --show-current 2>/dev/null)
+        branch=$(git branch --show-current 2>/dev/null)
         echo -e "  ${YELLOW}🌿 Branch:${RESET} ${branch:-detached}"
     fi
     
-    local disk_usage=$(df -h / | tail -1 | awk '{print $5}')
+    disk_usage=$(df -h / | tail -1 | awk '{print $5}')
     echo -e "  ${YELLOW}💾 Disk:${RESET} ${disk_usage} used"
     
     echo -e "  ${YELLOW}💡 Tip:${RESET} Type 'alias' to see all shortcuts"
@@ -221,8 +221,10 @@ gca() {
 # Kubernetes Completion
 # =====================================================
 if command -v kubectl &>/dev/null; then
-    source <(kubectl completion bash)
-    complete -F __start_kubectl k
+    if kubectl completion bash &>/dev/null; then
+        source <(kubectl completion bash)
+        complete -F __start_kubectl k
+    fi
 fi
 
 # =====================================================
